@@ -72,7 +72,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/search")
 //@CrossOrigin(origins = "http://localhost:5173")
-@CrossOrigin(origins = "https://search-it-a-search-engine-for-te-git-73b0be-ragini-06s-projects.vercel.app")
+@CrossOrigin(origins = "https://search-it-a-search-engine-for-techi.vercel.app/")
 public class SearchController {
 
     private final SearchService service;
