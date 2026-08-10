@@ -38,9 +38,10 @@ public class SearchService {
 
         Pageable pageable = PageRequest.of(page, size);
 
-        org.springframework.data.domain.Page<Page> pages =
-                repository.search(keyword, pageable);
+        String normalizedKeyword = normalizeQuery(keyword);
 
+        org.springframework.data.domain.Page<Page> pages =
+                repository.search(normalizedKeyword, pageable);
         List<SearchResponse> results = new ArrayList<>();
 
         for (Page p : pages.getContent()) {
@@ -78,5 +79,12 @@ public class SearchService {
 
         return repository.findSuggestions(query);
 
+    }
+    private String normalizeQuery(String keyword) {
+        return keyword
+                .toLowerCase()
+                .replaceAll("\\b(what|is|are|the|a|an|in|of|for|to|how|does|do|explain|tell|me|about|can|you|please)\\b", " ")
+                .replaceAll("\\s+", " ")
+                .trim();
     }
 }
